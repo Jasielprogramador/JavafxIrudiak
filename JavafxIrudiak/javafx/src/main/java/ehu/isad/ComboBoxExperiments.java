@@ -30,10 +30,7 @@ public class ComboBoxExperiments extends Application {
     private ComboBox comboBilduma = new ComboBox();
     private ListView listViewOfArgazki;
 
-    /*    VBox vbox =new VBox(imageView);
-                vbox.setAlignment(Pos.BASELINE_CENTER);
-    //Insets para calibrarlo
-                vbox.setPadding(new Insets(30,0,0,0));*/
+
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -74,8 +71,6 @@ public class ComboBoxExperiments extends Application {
 
         ObservableList<Argazki> argazkiList = FXCollections.observableArrayList();
         argazkiList.addAll(bildumaMap.get("abereak"));
-        argazkiList.addAll(bildumaMap1.get("landareak"));
-        argazkiList.addAll(bildumaMap2.get("fruta"));
 
         listViewOfArgazki = new ListView<>(argazkiList);
 
@@ -99,7 +94,9 @@ public class ComboBoxExperiments extends Application {
         //Te permite escribir
         comboBilduma.setEditable(true);
 
-        Scene scene = new Scene(comboBilduma, 400, 200);
+        VBox vbox = new VBox();
+        vbox.getChildren().addAll(comboBilduma,listViewOfArgazki,imageView);
+        Scene scene = new Scene(vbox, 400, 200);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
