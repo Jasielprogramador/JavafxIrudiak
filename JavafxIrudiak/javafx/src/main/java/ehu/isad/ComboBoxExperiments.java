@@ -52,7 +52,6 @@ public class ComboBoxExperiments extends Application {
                 new Argazki("Untxia", "untxia.png")
         ));
 
-        Map<String, List<Argazki>> bildumaMap1 = new HashMap<>();
 
         bildumaMap.put("landareak", List.of(
                 new Argazki("Cactus", "cactus.png"),
@@ -60,7 +59,6 @@ public class ComboBoxExperiments extends Application {
                 new Argazki("Landarehoria", "landarehoria.jpeg")
         ));
 
-        Map<String, List<Argazki>> bildumaMap2 = new HashMap<>();
 
         bildumaMap.put("fruta", List.of(
                 new Argazki("Sandia", "sandia.png"),
@@ -70,18 +68,26 @@ public class ComboBoxExperiments extends Application {
 
 
         ObservableList<Argazki> argazkiList = FXCollections.observableArrayList();
-        argazkiList.addAll(bildumaMap.get("abereak"));
+        /*argazkiList.addAll(bildumaMap.get("abereak"));
+        argazkiList.addAll(bildumaMap.get("landareak"));
+        argazkiList.addAll(bildumaMap.get("fruta"));*/
+
+
+        comboBilduma.getSelectionModel().selectFirst();
 
         listViewOfArgazki = new ListView<>(argazkiList);
+        argazkiList.addAll(bildumaMap.get("abereak"));
 
         listViewOfArgazki.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (observable.getValue() == null) return;
-
-            String fitx = ((Argazki) observable.getValue()).getIrudia();
+            if (observable.getValue() == null) return; String fitx = ((Argazki) observable.getValue()).getIrudia();
 
             try {
+                /*argazkiList.removeAll(bildumaMap.get(oldValue));
+                argazkiList.addAll(bildumaMap.get(newValue));*/
 
+                fitx = ((Argazki) observable.getValue()).getIrudia();
                 imageView.setImage(lortuIrudia(fitx /* 48x48 */));
+
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -89,7 +95,6 @@ public class ComboBoxExperiments extends Application {
 
         });
 
-        comboBilduma.getSelectionModel().selectFirst();
 
         //Te permite escribir
         comboBilduma.setEditable(true);
