@@ -27,4 +27,9 @@ public class Argazki {
     public void setIrudia(String irudia) {
         this.irudia = irudia;
     }
+
+    @Override
+    public String toString(){
+        return this.izena;
+    }
 }
