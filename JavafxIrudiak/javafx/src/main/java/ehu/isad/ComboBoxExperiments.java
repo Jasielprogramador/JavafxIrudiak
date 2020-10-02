@@ -60,7 +60,7 @@ public class ComboBoxExperiments extends Application {
         ));
 
 
-        bildumaMap.put("fruta", List.of(
+        bildumaMap.put("frutak", List.of(
                 new Argazki("Sandia", "sandia.png"),
                 new Argazki("Sagarra", "sagarra.jpeg"),
                 new Argazki("Fresa", "fresa.jpeg")
@@ -68,9 +68,6 @@ public class ComboBoxExperiments extends Application {
 
 
         ObservableList<Argazki> argazkiList = FXCollections.observableArrayList();
-        /*argazkiList.addAll(bildumaMap.get("abereak"));
-        argazkiList.addAll(bildumaMap.get("landareak"));
-        argazkiList.addAll(bildumaMap.get("fruta"));*/
 
 
         comboBilduma.getSelectionModel().selectFirst();
@@ -78,16 +75,22 @@ public class ComboBoxExperiments extends Application {
         listViewOfArgazki = new ListView<>(argazkiList);
         argazkiList.addAll(bildumaMap.get("abereak"));
 
-        listViewOfArgazki.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        comboBilduma.setOnAction(es -> {
+
+            if(!argazkiList.contains(comboBilduma.getValue())){
+                argazkiList.remove(0,3);
+                argazkiList.addAll(bildumaMap.get(comboBilduma.getValue()));
+            }
+
+        });
+
+            listViewOfArgazki.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (observable.getValue() == null) return; String fitx = ((Argazki) observable.getValue()).getIrudia();
 
             try {
-                /*argazkiList.removeAll(bildumaMap.get(oldValue));
-                argazkiList.addAll(bildumaMap.get(newValue));*/
 
                 fitx = ((Argazki) observable.getValue()).getIrudia();
                 imageView.setImage(lortuIrudia(fitx /* 48x48 */));
-
 
             } catch (IOException e) {
                 e.printStackTrace();
